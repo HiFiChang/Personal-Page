@@ -1,0 +1,107 @@
+/* highlight.js — GitHub-inspired neutral theme */
+/* Light mode */
+.hljs-comment,
+.hljs-quote {
+    color: #6a737d;
+    font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+    color: #24292e;
+    font-weight: 600;
+}
+
+.hljs-string,
+.hljs-attr,
+.hljs-addition {
+    color: #555;
+}
+
+.hljs-number,
+.hljs-literal {
+    color: #333;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+    color: #444;
+}
+
+.hljs-title,
+.hljs-section {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.hljs-type,
+.hljs-name {
+    color: #333;
+}
+
+.hljs-deletion {
+    color: #888;
+    text-decoration: line-through;
+}
+
+.hljs-meta {
+    color: #777;
+}
+
+.hljs-variable,
+.hljs-template-variable {
+    color: #444;
+}
+
+/* Dark mode overrides */
+[data-theme='dark'] .hljs-comment,
+[data-theme='dark'] .hljs-quote {
+    color: #6b7280;
+}
+
+[data-theme='dark'] .hljs-keyword,
+[data-theme='dark'] .hljs-selector-tag {
+    color: #e5e7eb;
+    font-weight: 600;
+}
+
+[data-theme='dark'] .hljs-string,
+[data-theme='dark'] .hljs-attr,
+[data-theme='dark'] .hljs-addition {
+    color: #9ca3af;
+}
+
+[data-theme='dark'] .hljs-number,
+[data-theme='dark'] .hljs-literal {
+    color: #d1d5db;
+}
+
+[data-theme='dark'] .hljs-built_in,
+[data-theme='dark'] .hljs-builtin-name {
+    color: #b0b4bc;
+}
+
+[data-theme='dark'] .hljs-title,
+[data-theme='dark'] .hljs-section {
+    color: #f3f4f6;
+    font-weight: 600;
+}
+
+[data-theme='dark'] .hljs-type,
+[data-theme='dark'] .hljs-name {
+    color: #d1d5db;
+}
+
+[data-theme='dark'] .hljs-deletion {
+    color: #6b7280;
+    text-decoration: line-through;
+}
+
+[data-theme='dark'] .hljs-meta {
+    color: #9ca3af;
+}
+
+[data-theme='dark'] .hljs-variable,
+[data-theme='dark'] .hljs-template-variable {
+    color: #b0b4bc;
+}
