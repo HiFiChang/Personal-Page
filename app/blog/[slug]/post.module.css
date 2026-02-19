@@ -11,6 +11,36 @@
     gap: 16px;
 }
 
+.headerTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.contentEnter {
+    animation: contentFadeIn 0.3s ease forwards;
+}
+
+.contentExit {
+    opacity: 0.3;
+    filter: blur(2px);
+    transition: all 0.15s ease;
+}
+
+@keyframes contentFadeIn {
+    from {
+        opacity: 0.3;
+        filter: blur(2px);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0px);
+    }
+}
+
 .back {
     display: inline-flex;
     align-items: center;

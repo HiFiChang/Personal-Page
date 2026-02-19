@@ -12,6 +12,13 @@
   gap: 20px;
 }
 
+.heroTop {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .name {
   font-family: var(--font-serif), 'Noto Serif SC', serif;
   font-size: clamp(2.8rem, 7vw, 4.2rem);

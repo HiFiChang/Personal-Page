@@ -48,7 +48,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-sans), 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg);
   color: var(--fg);
   line-height: 1.7;
@@ -67,7 +67,12 @@ img {
 }
 
 /* ===== Typography ===== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Instrument Serif', 'Noto Serif SC', Georgia, serif;
   font-weight: 400;
   line-height: 1.3;
@@ -169,11 +174,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prose code {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-family: var(--font-mono), 'Fira Code', monospace;
   font-size: 0.88em;
 }
 
-.prose :not(pre) > code {
+.prose :not(pre)>code {
   background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -223,6 +228,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -230,8 +236,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .animate-fade-in-up {
@@ -242,10 +253,21 @@ h1, h2, h3, h4, h5, h6 {
   animation: fadeIn 0.6s ease forwards;
 }
 
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.25s; }
-.delay-3 { animation-delay: 0.4s; }
-.delay-4 { animation-delay: 0.55s; }
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.25s;
+}
+
+.delay-3 {
+  animation-delay: 0.4s;
+}
+
+.delay-4 {
+  animation-delay: 0.55s;
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 640px) {

@@ -1,0 +1,5 @@
+.glitching {
+    /* Subtle cyan glow during scramble */
+    text-shadow: 0 0 8px rgba(100, 200, 255, 0.15);
+    transition: text-shadow 0.2s ease;
+}

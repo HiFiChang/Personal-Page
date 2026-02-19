@@ -1,9 +1,6 @@
-import Link from 'next/link';
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import remarkGfm from 'remark-gfm';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeSlug from 'rehype-slug';
 import { getPostBySlug, getAllSlugs } from '@/lib/posts';
+import { markdownToHtml } from '@/lib/markdown';
+import PostContent from './PostContent';
 import styles from './post.module.css';
 
 export async function generateStaticParams() {
@@ -20,60 +17,28 @@ export async function generateMetadata({ params }) {
     };
 }
 
-function formatDate(dateStr) {
-    if (!dateStr) return '';
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
-}
-
 export default async function PostPage({ params }) {
     const { slug } = await params;
     const post = getPostBySlug(slug);
 
-    const mdxOptions = {
-        mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeHighlight, rehypeSlug],
-        },
-    };
+    // Render markdown to HTML on the server
+    const htmlEn = await markdownToHtml(post.content);
+    const htmlZh = post.hasZh && post.contentZh
+        ? await markdownToHtml(post.contentZh)
+        : null;
 
     return (
         <article className={styles.post}>
-            <header className={styles.header}>
-                <Link href="/blog" className={styles.back}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M19 12H5" />
-                        <path d="M12 19l-7-7 7-7" />
-                    </svg>
-                    <span>Back to Blog</span>
-                </Link>
-
-                <h1 className={styles.title}>{post.title}</h1>
-
-                <div className={styles.meta}>
-                    {post.date && (
-                        <time className={styles.date}>{formatDate(post.date)}</time>
-                    )}
-                    <span className={styles.dot}>·</span>
-                    <span className={styles.readTime}>{post.readingTime} min read</span>
-                </div>
-
-                {post.tags && post.tags.length > 0 && (
-                    <div className={styles.tags}>
-                        {post.tags.map((tag) => (
-                            <span key={tag} className={styles.tag}>{tag}</span>
-                        ))}
-                    </div>
-                )}
-            </header>
-
-            <div className={`prose ${styles.content}`}>
-                <MDXRemote source={post.content} options={mdxOptions} />
-            </div>
+            <PostContent
+                title={post.title}
+                titleZh={post.titleZh}
+                date={post.date}
+                readingTime={post.readingTime}
+                tags={post.tags}
+                htmlEn={htmlEn}
+                htmlZh={htmlZh}
+                hasZh={post.hasZh}
+            />
         </article>
     );
 }

@@ -1,31 +1,83 @@
+'use client';
+
+import { useState } from 'react';
+import LangToggle from '@/components/LangToggle';
+import GlitchText from '@/components/GlitchText';
 import styles from './page.module.css';
 
+const content = {
+  en: {
+    name: 'Chang Haofei',
+    bio: [
+      {
+        text: 'Junior student in __Computer Science__ at Renmin University of China (RUC). Recipient of the First-Class Academic Scholarship.',
+      },
+      {
+        text: 'Interested in __AI__, __systems programming__, and the intersection of technology with creative expression. Currently exploring large language models and compiler design.',
+      },
+      {
+        text: 'I believe in building things that are both functional and beautiful.',
+      },
+    ],
+    status: 'Currently based in Beijing, China',
+  },
+  zh: {
+    name: '常皓飞',
+    bio: [
+      {
+        text: '中国人民大学__计算机科学与技术__专业大三学生，一等奖学金获得者。',
+      },
+      {
+        text: '对 __AI__、__系统编程__、以及技术与创造性表达的交叉领域感兴趣。目前专注于大语言模型与编译器设计。',
+      },
+      {
+        text: '我相信好的作品兼具功能与美感。',
+      },
+    ],
+    status: '现居北京',
+  },
+};
+
+function BioLine({ text, lang }) {
+  // Parse __highlight__ markers
+  const parts = text.split(/(__[^_]+__)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('__') && part.endsWith('__')) {
+      const inner = part.slice(2, -2);
+      return (
+        <GlitchText key={i} text={inner} lang={lang} as="span" className={styles.highlight} />
+      );
+    }
+    return <GlitchText key={i} text={part} lang={lang} as="span" />;
+  });
+}
+
 export default function Home() {
+  const [lang, setLang] = useState('en');
+  const c = content[lang];
+
   return (
     <div className={styles.home}>
       {/* Hero */}
       <section className={styles.hero}>
-        <h1 className={`${styles.name} animate-fade-in-up`}>
-          Chang Haofei
-        </h1>
+        <div className={styles.heroTop}>
+          <h1 className={`${styles.name} animate-fade-in-up`}>
+            <GlitchText text={c.name} lang={lang} as="span" />
+          </h1>
+          <div className={`animate-fade-in-up delay-1`}>
+            <LangToggle lang={lang} onToggle={() => setLang(lang === 'en' ? 'zh' : 'en')} />
+          </div>
+        </div>
         <div className={`${styles.titleLine} animate-fade-in-up delay-1`} />
       </section>
 
       {/* Bio */}
       <section className={`${styles.bio} animate-fade-in-up delay-2`}>
-        <p className={styles.bioText}>
-          Junior student in <span className={styles.highlight}>Computer Science</span> at
-          Renmin University of China (RUC). Recipient of the First-Class Academic Scholarship.
-        </p>
-        <p className={styles.bioText}>
-          Interested in <span className={styles.highlight}>AI</span>,{' '}
-          <span className={styles.highlight}>systems programming</span>, and the intersection
-          of technology with creative expression. Currently exploring large language models
-          and compiler design.
-        </p>
-        <p className={styles.bioText}>
-          I believe in building things that are both functional and beautiful.
-        </p>
+        {c.bio.map((line, i) => (
+          <p key={i} className={styles.bioText}>
+            <BioLine text={line.text} lang={lang} />
+          </p>
+        ))}
       </section>
 
       {/* Social Links */}
@@ -72,7 +124,7 @@ export default function Home() {
       {/* Status */}
       <section className={`${styles.status} animate-fade-in-up delay-4`}>
         <div className={styles.statusDot} />
-        <span>Currently based in Beijing, China</span>
+        <GlitchText text={c.status} lang={lang} as="span" />
       </section>
     </div>
   );

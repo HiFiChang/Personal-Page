@@ -1,4 +1,4 @@
-import { Instrument_Serif, Inter, Noto_Serif_SC } from 'next/font/google';
+import { Instrument_Serif, Didact_Gothic, Noto_Serif_SC, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import ThemeProvider from '@/components/ThemeProvider';
 import Header from '@/components/Header';
@@ -13,10 +13,17 @@ const instrumentSerif = Instrument_Serif({
   variable: '--font-serif',
 });
 
-const inter = Inter({
+const didactGothic = Didact_Gothic({
+  weight: '400',
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
 });
 
 const notoSerifSC = Noto_Serif_SC({
@@ -41,7 +48,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${inter.variable} ${notoSerifSC.variable}`}
+      className={`${instrumentSerif.variable} ${didactGothic.variable} ${notoSerifSC.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head />
