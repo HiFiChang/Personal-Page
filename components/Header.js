@@ -13,7 +13,7 @@ export default function Header() {
         <header className={styles.header}>
             <div className={styles.inner}>
                 <Link href="/" className={styles.logo}>
-                    C.
+                    Chang's Log
                 </Link>
 
                 <nav className={styles.nav}>

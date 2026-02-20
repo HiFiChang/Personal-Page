@@ -83,7 +83,7 @@ export default function Home() {
       {/* Social Links */}
       <section className={`${styles.social} animate-fade-in-up delay-3`}>
         <a
-          href="https://github.com/changhaofei"
+          href="https://github.com/HiFiChang"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.socialLink}
@@ -96,7 +96,7 @@ export default function Home() {
         </a>
 
         <a
-          href="https://scholar.google.com/"
+          href="https://scholar.google.com/citations?user=901Xpl0AAAAJ&hl=en&oi=ao"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.socialLink}
@@ -109,7 +109,7 @@ export default function Home() {
         </a>
 
         <a
-          href="mailto:changhaofei@ruc.edu.cn"
+          href="mailto:haofeichang@ruc.edu.cn"
           className={styles.socialLink}
           aria-label="Email"
         >
