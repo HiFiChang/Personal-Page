@@ -1,27 +1,53 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
 
-const votesFile = path.join(process.cwd(), 'data', 'votes.json');
+// Lazy-init Redis client so local dev without env vars doesn't crash
+let redis = null;
 
-function readVotes() {
-    try {
-        const raw = fs.readFileSync(votesFile, 'utf8');
-        return JSON.parse(raw);
-    } catch {
-        return {};
+async function getRedis() {
+    if (redis) return redis;
+    if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+        return null; // local dev fallback
     }
+    const { Redis } = await import('@upstash/redis');
+    redis = new Redis({
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    });
+    return redis;
 }
 
-function writeVotes(data) {
-    fs.writeFileSync(votesFile, JSON.stringify(data, null, 2));
+// In-memory fallback for local development
+const localStore = {};
+
+async function getVotes(slug) {
+    const r = await getRedis();
+    if (r) {
+        const up = (await r.get(`vote:${slug}:up`)) ?? 0;
+        const down = (await r.get(`vote:${slug}:down`)) ?? 0;
+        return { up: Number(up), down: Number(down) };
+    }
+    return localStore[slug] ?? { up: 0, down: 0 };
+}
+
+async function incrementVote(slug, type) {
+    const r = await getRedis();
+    if (r) {
+        const val = await r.incr(`vote:${slug}:${type}`);
+        const other = (await r.get(`vote:${slug}:${type === 'up' ? 'down' : 'up'}`)) ?? 0;
+        return type === 'up'
+            ? { up: Number(val), down: Number(other) }
+            : { up: Number(other), down: Number(val) };
+    }
+    // local fallback
+    if (!localStore[slug]) localStore[slug] = { up: 0, down: 0 };
+    localStore[slug][type] += 1;
+    return localStore[slug];
 }
 
 export async function GET(request, { params }) {
     const { slug } = await params;
-    const votes = readVotes();
-    const entry = votes[slug] || { up: 0, down: 0 };
-    return NextResponse.json(entry);
+    const votes = await getVotes(slug);
+    return NextResponse.json(votes);
 }
 
 export async function POST(request, { params }) {
@@ -32,12 +58,6 @@ export async function POST(request, { params }) {
         return NextResponse.json({ error: 'Invalid type' }, { status: 400 });
     }
 
-    const votes = readVotes();
-    if (!votes[slug]) {
-        votes[slug] = { up: 0, down: 0 };
-    }
-    votes[slug][type] += 1;
-    writeVotes(votes);
-
-    return NextResponse.json(votes[slug]);
+    const updated = await incrementVote(slug, type);
+    return NextResponse.json(updated);
 }
