@@ -13,7 +13,7 @@ tags: ["VPN", "SSH"]
 
 首先需要配置本电脑代理，并确认其监听端口。以V2rayN为例，默认监听端口为10808。
 
-![alt text](image.png)
+![alt text](/images/ssh-codex/image.png)
 
 找到目标服务器SSH config，添加
 
@@ -27,6 +27,6 @@ RemoteForward 10808 127.0.0.1:10808
 
 设置VS Code使用本地代理
 
-![alt text](image-1.png)
+![alt text](/images/ssh-codex/image-1.png)
 
 完成配置，codex已经可以正常使用！

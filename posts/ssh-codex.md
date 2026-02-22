@@ -13,13 +13,12 @@ This post introduces an elegant solution to bypass these network restrictions. T
 
 First, you need to configure the proxy on your local machine and verify its listening port. Taking V2rayN as an example, the default listening port is usually `10808`.
 
-![alt text](image.png)
+![alt text](/images/ssh-codex/image.png)
 
 Locate the SSH config file for your target server and add the following line:
 
 ```text
 RemoteForward 10808 127.0.0.1:10808
-
 ```
 
 This configuration opens a listening port (`10808`) on the remote server. It will capture all traffic sent to that remote port and forward it securely back to your local machine.
@@ -28,6 +27,6 @@ This configuration opens a listening port (`10808`) on the remote server. It wil
 
 Next, adjust your VS Code settings to use this local proxy.
 
-Once this configuration is complete, Codex and Copilot will be fully functional and ready to use!
+![alt text](/images/ssh-codex/image-1.png)
 
-```
+Once this configuration is complete, Codex and Copilot will be fully functional and ready to use!
