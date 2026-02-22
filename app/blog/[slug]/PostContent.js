@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import LangToggle from '@/components/LangToggle';
 import GlitchText from '@/components/GlitchText';
+import VoteButtons from '@/components/VoteButtons';
 import styles from './post.module.css';
 
 export default function PostContent({
+    slug,
     title,
     titleZh,
     date,
@@ -83,6 +85,8 @@ export default function PostContent({
                 className={`prose ${styles.content} ${transitioning ? styles.contentExit : styles.contentEnter}`}
                 dangerouslySetInnerHTML={{ __html: currentHtml }}
             />
+
+            <VoteButtons slug={slug} />
         </>
     );
 }

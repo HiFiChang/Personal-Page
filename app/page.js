@@ -10,31 +10,93 @@ const content = {
     name: 'Chang Haofei',
     bio: [
       {
-        text: 'Junior student in __Computer Science__ at Renmin University of China (RUC). Recipient of the First-Class Academic Scholarship.',
+        text: 'Junior student in __Computer Science__ at Renmin University of China (RUC).',
       },
       {
-        text: 'Interested in __AI__, __systems programming__, and the intersection of technology with creative expression. Currently exploring large language models and compiler design.',
-      },
-      {
-        text: 'I believe in building things that are both functional and beautiful.',
+        text: 'Interested in __LLM Agent__, __Multimodal__.',
       },
     ],
     status: 'Currently based in Beijing, China',
+    honorsLabel: 'Honors',
+    honors: [
+      { text: 'First-Class Academic Excellence Scholarship, RUC' },
+      { text: 'Merit Student, RUC' },
+    ],
+    publicationsLabel: 'Publications',
+    publications: [
+      {
+        title: 'EnvScaler: Scaling Tool-Interactive Environments for LLM Agent via Programmatic Synthesis',
+        authors: [
+          { name: 'Xiaoshuai Song' },
+          { name: 'Haofei Chang', self: true },
+          { name: 'Guanting Dong' },
+          { name: 'Yutao Zhu' },
+          { name: 'Zhicheng Dou' },
+          { name: 'Ji-Rong Wen' },
+        ],
+        venue: 'arXiv 2026.1',
+        url: 'https://arxiv.org/abs/2601.05808',
+      },
+      {
+        title: 'An End-to-End Multimodal System for Subtitle Recognition and Chinese-Japanese Translation in Short Dramas',
+        authors: [
+          { name: 'Jing An*' },
+          { name: 'Haofei Chang*', self: true },
+          { name: 'Rui-Yang Ju*' },
+          { name: 'Jinhua Su*' },
+          { name: 'Yanbing Bai' },
+          { name: 'Xin Qu' },
+        ],
+        venue: 'ICASSP 2026 [CCF-B]',
+        url: '',
+      },
+    ],
   },
   zh: {
     name: '常皓飞',
     bio: [
       {
-        text: '中国人民大学__计算机科学与技术__专业大三学生，一等奖学金获得者。',
+        text: '中国人民大学__计算机科学与技术__专业大三学生。',
       },
       {
-        text: '对 __AI__、__系统编程__、以及技术与创造性表达的交叉领域感兴趣。目前专注于大语言模型与编译器设计。',
-      },
-      {
-        text: '我相信好的作品兼具功能与美感。',
+        text: '对 __LLM Agent__、__多模态__感兴趣。',
       },
     ],
     status: '现居北京',
+    honorsLabel: '荣誉',
+    honors: [
+      { text: '中国人民大学学习优秀一等奖学金' },
+      { text: '中国人民大学三好学生' },
+    ],
+    publicationsLabel: '论文',
+    publications: [
+      {
+        title: 'EnvScaler: Scaling Tool-Interactive Environments for LLM Agent via Programmatic Synthesis',
+        authors: [
+          { name: 'Xiaoshuai Song' },
+          { name: 'Haofei Chang', self: true },
+          { name: 'Guanting Dong' },
+          { name: 'Yutao Zhu' },
+          { name: 'Zhicheng Dou' },
+          { name: 'Ji-Rong Wen' },
+        ],
+        venue: 'arXiv 2026.1',
+        url: 'https://arxiv.org/abs/2601.05808',
+      },
+      {
+        title: 'An End-to-End Multimodal System for Subtitle Recognition and Chinese-Japanese Translation in Short Dramas',
+        authors: [
+          { name: 'Jing An*' },
+          { name: 'Haofei Chang*', self: true },
+          { name: 'Rui-Yang Ju*' },
+          { name: 'Jinhua Su*' },
+          { name: 'Yanbing Bai' },
+          { name: 'Xin Qu' },
+        ],
+        venue: 'ICASSP 2026 [CCF-B]',
+        url: '',
+      },
+    ],
   },
 };
 
@@ -78,6 +140,41 @@ export default function Home() {
             <BioLine text={line.text} lang={lang} />
           </p>
         ))}
+      </section>
+
+      {/* Honors */}
+      <section className={`${styles.listSection} animate-fade-in-up delay-2`}>
+        <h2 className={styles.sectionLabel}>{c.honorsLabel}</h2>
+        <ul className={styles.list}>
+          {c.honors.map((h, i) => (
+            <li key={i} className={styles.listItem}>{h.text}</li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Publications */}
+      <section className={`${styles.listSection} animate-fade-in-up delay-3`}>
+        <h2 className={styles.sectionLabel}>{c.publicationsLabel}</h2>
+        <ul className={styles.list}>
+          {c.publications.map((p, i) => (
+            <li key={i} className={styles.listItem}>
+              <a href={p.url} target="_blank" rel="noopener noreferrer" className={styles.pubLink}>
+                {p.title}
+              </a>
+              {p.authors && (
+                <span className={styles.authors}>
+                  {p.authors.map((a, j) => (
+                    <span key={j}>
+                      {j > 0 && ', '}
+                      {a.self ? <strong>{a.name}</strong> : a.name}
+                    </span>
+                  ))}
+                </span>
+              )}
+              <span className={styles.venue}>{p.venue}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Social Links */}

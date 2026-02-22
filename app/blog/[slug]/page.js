@@ -30,6 +30,7 @@ export default async function PostPage({ params }) {
     return (
         <article className={styles.post}>
             <PostContent
+                slug={slug}
                 title={post.title}
                 titleZh={post.titleZh}
                 date={post.date}
