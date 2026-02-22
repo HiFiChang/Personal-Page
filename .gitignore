@@ -42,3 +42,4 @@ next-env.d.ts
 
 # local vote data
 /data/votes.json
+.env*.local
