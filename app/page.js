@@ -19,7 +19,7 @@ const content = {
     status: 'Currently based in Beijing, China',
     honorsLabel: 'Honors',
     honors: [
-      { text: 'First-Class Academic Excellence Scholarship, RUC' },
+      { text: 'First-Class   Excellence Scholarship, RUC' },
       { text: 'Merit Student, RUC' },
     ],
     publicationsLabel: 'Publications',

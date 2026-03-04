@@ -1,6 +1,6 @@
 ---
 title: "解决VS Code连接服务器OOM崩溃问题"
-date: "2026-02-21"
+date: "2025-09-22"
 description: "解决字体渲染导致的OOM崩溃问题"
 tags: ["VS Code", "SSH"]
 ---

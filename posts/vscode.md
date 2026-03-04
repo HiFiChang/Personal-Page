@@ -1,6 +1,6 @@
 ---
 title: "Fix: VS Code Crashes with OOM When Connected to a Remote Server"
-date: "2026-02-21"
+date: "2025-09-22"
 description: "Fixing out-of-memory crashes caused by font rendering in VS Code."
 tags: ["VS Code", "SSH"]
 ---
