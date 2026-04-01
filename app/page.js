@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import LangToggle from '@/components/LangToggle';
 import GlitchText from '@/components/GlitchText';
 import styles from './page.module.css';
@@ -16,6 +17,8 @@ const content = {
         text: 'Interested in __LLM Agent__, __Multimodal__.',
       },
     ],
+    blogPrefix: 'Check out my ',
+    blogLink: 'Blog',
     status: 'Currently based in Beijing, China',
     honorsLabel: 'Honors',
     honors: [
@@ -62,6 +65,8 @@ const content = {
         text: '对 __LLM Agent__、__多模态__感兴趣。',
       },
     ],
+    blogPrefix: '欢迎访问我的 ',
+    blogLink: '博客',
     status: '现居北京',
     honorsLabel: '荣誉',
     honors: [
@@ -140,6 +145,13 @@ export default function Home() {
             <BioLine text={line.text} lang={lang} />
           </p>
         ))}
+        <p className={styles.bioText} style={{ marginTop: '0.5rem' }}>
+          {c.blogPrefix}
+          <Link href="/blog" className={styles.highlight}>
+            <GlitchText text={c.blogLink} lang={lang} as="span" />
+          </Link>
+          {lang === 'zh' ? ' ！' : ' !'}
+        </p>
       </section>
 
       {/* Honors */}
