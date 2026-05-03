@@ -51,7 +51,7 @@ const content = {
           { name: 'Xin Qu' },
         ],
         venue: 'ICASSP 2026 [CCF-B]',
-        url: '',
+        url: 'https://ieeexplore.ieee.org/abstract/document/11464228',
       },
     ],
   },
